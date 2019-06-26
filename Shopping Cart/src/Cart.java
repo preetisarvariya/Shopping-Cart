@@ -6,13 +6,13 @@ import java.util.List;
  * @author Preeti
  *
  */
-public class Cart {
+public class Cart  {
 	 List<Product> cartItems = new ArrayList<Product>();
 	    
 	    /**
 	     * @param pid
 	     */
-	    public void addProductToCartByPID(int pid) {
+	    public void addProductToCartByPID(int pid) throws ShoppingCartException {
 	        Product product = getProductByProductID(pid);
 	        addToCart(product);
 	    }
@@ -21,7 +21,7 @@ public class Cart {
 	     * @param pid
 	     * @return
 	     */
-	    private Product getProductByProductID(int pid) {
+	    private Product getProductByProductID(int pid) throws ShoppingCartException{
 	        Product product = null;
 	        List<Product> products = new Products().getProducts();
 	        for (Product prod: products) {
@@ -35,14 +35,14 @@ public class Cart {
 	    /**
 	     * @param product
 	     */
-	    public void addToCart(Product product) {
+	    public void addToCart(Product product) throws ShoppingCartException{
 	        cartItems.add(product);
 	    }
 
 	    /**
 	     * @param pid
 	     */
-	    public void removeProductByPID(int pid) {
+	    public void removeProductByPID(int pid) throws ShoppingCartException{
 	        Product prod = getProductByProductID(pid);
 	        cartItems.remove(prod);
 	    }

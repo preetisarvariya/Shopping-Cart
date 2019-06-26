@@ -13,7 +13,7 @@ public class UI {
     Cart cart = new Cart();
     private int ch = 0;
     
-    public UI () {
+    public UI () throws ShoppingCartException{
         menu();
     }
     
@@ -29,7 +29,7 @@ public class UI {
         System.out.println("0. Exit");
     }
     
-    public void menu () {
+    public void menu () throws ShoppingCartException{
         do {
             startScreen();
             getUserInput();
@@ -54,7 +54,7 @@ public class UI {
         } while (ch != 0);
     }
 
-    public void innerChoice1() {
+    public void innerChoice1() throws ShoppingCartException{
         switch (ch) {
             case 1:
                 addProductToCart();
@@ -71,7 +71,18 @@ public class UI {
 
     public int getUserInput() throws NumberFormatException {
         Scanner in = new Scanner (System.in);
-        ch = Integer.parseInt(in.nextLine());
+        try
+        {
+        	ch = Integer.parseInt(in.nextLine());	
+        }
+        catch(NullPointerException ex)
+        {
+        	System.out.print("Null Pointer Exception been thrown");
+        }
+        catch(NumberFormatException ex){
+        	System.out.print("Number Format Exception Caught");
+        }
+        
         return ch;
     }
 
@@ -87,7 +98,7 @@ public class UI {
         }
     }
 
-    public void addProductToCart() {
+    public void addProductToCart() throws ShoppingCartException {
         int pid = getUserInput();
         cart.addProductToCartByPID(pid);      
     }
@@ -96,7 +107,7 @@ public class UI {
         cart.printCartItems();
     }
 
-    public void removeProductFromCart() {
+    public void removeProductFromCart() throws ShoppingCartException{
         int pid = getUserInput();
         cart.removeProductByPID(pid);
     }
